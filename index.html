@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nguyen Dang Khoa — VN Downloads</title>
+  <meta name="description" content="Official downloads by Nguyen Dang Khoa — Vietnam-only access." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Neon / cyberpunk theme */
+    :root{
+      --bg:#05060a; --panel:#0b0f16; --neon1:#00e5ff; --neon2:#ff3d81; --neon3:#9dff6b; --muted:#9aa3b2;
+      --glass: rgba(255,255,255,0.04);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:radial-gradient(1200px 600px at 10% 10%, rgba(0,229,255,0.06), transparent), radial-gradient(800px 400px at 90% 90%, rgba(255,61,129,0.04), transparent), var(--bg);color:#e6f0ff}
+    .wrap{max-width:1100px;margin:40px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .dot{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--neon1),var(--neon2));box-shadow:0 0 18px var(--neon1),0 0 40px rgba(255,61,129,0.12)}
+    h1{font-family:Orbitron,monospace;margin:0;font-size:20px;letter-spacing:1px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    /* Glass panel */
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px);padding:18px;border-radius:12px;margin-top:18px}
+
+    /* animated background lines */
+    .grid {position:fixed;inset:0;pointer-events:none;mix-blend-mode:overlay}
+    .grid::before, .grid::after{content:'';position:absolute;inset:0;background-image:linear-gradient(transparent 49%, rgba(255,255,255,0.02) 50%);background-size:100% 40px;opacity:0.6;transform:translateY(0);animation:scrollY 18s linear infinite}
+    .grid::after{background-image:linear-gradient(90deg, transparent 49%, rgba(0,229,255,0.02) 50%);background-size:40px 100%;opacity:0.5;animation-duration:30s}
+    @keyframes scrollY{from{transform:translateY(0)}to{transform:translateY(-40px)}}
+
+    /* Neon download cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+    .card{position:relative;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 30px rgba(0,0,0,0.6)}
+    .card h3{margin:0 0 6px;color:var(--neon2);font-family:Orbitron}
+    .card .meta{color:var(--muted);font-size:13px;margin-bottom:10px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#001;font-weight:700;text-decoration:none;box-shadow:0 8px 30px rgba(0,229,255,0.08);border:0}
+    .btn.disabled{opacity:0.35;pointer-events:none}
+
+    /* Restricted overlay */
+    .blocked{display:flex;align-items:center;justify-content:center;min-height:220px;flex-direction:column;gap:12px}
+    .country{font-weight:700;color:var(--neon3)}
+
+    /* small helpers */
+    .right{display:flex;gap:8px;align-items:center}
+
+    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
+
+    @media (max-width:620px){.wrap{margin:20px;padding:12px}.logo .dot{width:40px;height:40px}}
+  </style>
+</head>
+<body>
+  <div class="grid" aria-hidden></div>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="dot" aria-hidden></div>
+        <div>
+          <h1>Nguyen Dang Khoa — VN Downloads</h1>
+          <p class="lead">Official place to download Python tools and products. Vietnam only access.</p>
+        </div>
+      </div>
+      <div class="right">
+        <div id="ip-info" style="text-align:right;color:var(--muted)">Checking location…</div>
+      </div>
+    </header>
+
+    <section class="panel" id="main-panel">
+      <div id="allowed-content" style="display:none">
+        <p style="margin:0 0 8px;color:var(--muted)">Welcome — you can download products from <strong>Nguyen Dang Khoa</strong>. Click a product to open the download link.</p>
+
+        <div class="cards" id="cards">
+          <!-- Example product card; replace data-download with your real link -->
+          <div class="card">
+            <h3>May Tinh (Calculator)</h3>
+            <div class="meta">Python tool • Author: Nguyen Dang Khoa</div>
+            <div class="actions">
+              <a class="btn disabled" data-download="https://drive.google.com/file/d/1-h5tZ5V3ZQTaCsLDcL2u_kOkrwpxL8QU/view?usp=drive_link" href="#" id="dl-prod-a">Download (Calculator)</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Manager</h3>
+            <div class="meta">Python package • Author: Nguyen Dang Khoa</div>
+            <div class="actions">
+              <a class="btn disabled" data-download="https://drive.google.com/file/d/1rigxB2GhPm50gUUBWVln83Wg3qDblrWV/view?usp=sharing" href="#" id="dl-prod-b">Download (Manager)</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Product C</h3>
+            <div class="meta">Script & tools • Author: Nguyen Dang Khoa</div>
+            <div class="actions">
+              <a class="btn disabled" data-download="#" href="#" id="dl-prod-c">Download (placeholder)</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:13px"> <code></code> </div>
+      </div>
+
+      <div id="blocked-content" class="blocked" style="display:none">
+        <div style="font-size:22px;">Access restricted</div>
+        <div class="country">Only users from Vietnam can access downloads</div>
+        <div style="color:var(--muted)">Your detected country: <span id="detected-country">—</span></div>
+        <div style="margin-top:12px;color:var(--muted)">If you are in Vietnam but seeing this, you can <button id="override-btn" class="btn">Request temporary access</button></div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Nguyen Dang Khoa.
+    </footer>
+  </div>
+
+  <script>
+    // Utility: toggle visibility
+    const $ = sel => document.querySelector(sel);
+    const setYear = () => document.getElementById('year').textContent = new Date().getFullYear();
+    setYear();
+
+    // Configuration: which geolocation API to use (no key required)
+    const GEO_API = 'https://ipapi.co/json/'; // returns country & region info
+
+    async function detectCountry(){
+      try{
+        const resp = await fetch(GEO_API, {cache:'no-store'});
+        if(!resp.ok) throw new Error('geo-fail');
+        const data = await resp.json();
+        // ipapi.co uses 'country' or 'country_code'
+        const country = (data.country || data.country_code || '').toString().trim();
+        const ip = data.ip || '';
+        $('#ip-info').textContent = ip ? `${ip} · ${country}` : `${country}`;
+        return country;
+      }catch(err){
+        $('#ip-info').textContent = 'Location check failed';
+        return null;
+      }
+    }
+
+    function showAllowed(){
+      $('#allowed-content').style.display = '';
+      $('#blocked-content').style.display = 'none';
+      // enable download placeholders if data-download is set to a real url
+      document.querySelectorAll('[data-download]').forEach(btn=>{
+        const link = btn.getAttribute('data-download');
+        if(link && link !== '#' && link.trim() !== ''){
+          btn.classList.remove('disabled');
+          btn.href = link;
+          btn.target = '_blank';
+        } else {
+          btn.classList.add('disabled');
+          btn.href = '#';
+        }
+      })
+    }
+
+    function showBlocked(country){
+      $('#allowed-content').style.display = 'none';
+      $('#blocked-content').style.display = '';
+      $('#detected-country').textContent = country || 'Unknown';
+    }
+
+    async function init(){
+      const country = await detectCountry();
+      // Accept 'VN' or 'Vietnam' (case-insensitive)
+      const ok = country && /^VN|Vietnam/i.test(country);
+      if(ok){
+        showAllowed();
+      } else {
+        showBlocked(country);
+      }
+    }
+
+    // Manual override request (simple local confirmation) — not secure
+    $('#override-btn').addEventListener('click', ()=>{
+      const p = prompt('If you are in Vietnam enter the secret code or type ALLOW to proceed (for testing).');
+      if(!p) return;
+      if(p.trim().toUpperCase() === 'ALLOW'){
+        showAllowed();
+        alert('Temporary access granted (client-side only). Remember to configure server-side rules for production.');
+      } else {
+        alert('Incorrect code');
+      }
+    });
+
+    // Run
+    init();
+  </script>
+</body>
+</html>
